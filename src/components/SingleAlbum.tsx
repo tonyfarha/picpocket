@@ -1,35 +1,31 @@
-import { useEffect, useState } from "react"
-import { Photo } from "../interfaces";
+import { useEffect } from "react"
 import { useParams } from "react-router-dom";
-import { Image } from 'primereact/image';
+import { usePicPocket } from "../contexts/PicContext";
+import { SinglePhoto } from ".";
 
 
 
-export default function SingleAlbum() {   
-	const [photos, setPhotos] = useState<Photo[]>([]);
+export function SingleAlbum() {   
 	const { id: albumId } = useParams();
+	const { photos, getPhotos, loading } = usePicPocket();
 
 	useEffect(() => {
-
-		getPhotos();
-
-		async function getPhotos() {
-			const res = await fetch(`${import.meta.env.VITE_API_PHOTOS_URI}?albumId=${albumId}`);
-			const json = await res.json();
-			setPhotos(json as Photo[]);			
-		}
+		console.log('albumId', albumId);
+		
+		getPhotos(albumId);
 
 	}, [albumId])
 
 	return (
 		<>
-			<div className="album-grid">
-				{photos.map((photo, index) => (
-					<div key={index} className="card flex justify-content-center">
-						<Image src={photo.thumbnailUrl} zoomSrc={photo.url} alt={photo.title} width="150" preview />
-					</div>
-				))}
-			</div>
+			{loading && <h1>Loading...</h1>}
+			{!loading && 
+				<div className="album-grid">
+					{photos.map((photo, index) => (
+						<SinglePhoto key={index} photo={photo} />
+					))}
+				</div> 
+			}
 		</>
 	)
 }

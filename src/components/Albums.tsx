@@ -3,12 +3,14 @@ import { Album } from "../interfaces";
 import { Link } from "react-router-dom";
 
 
-export default function Albums() {   
+export function Albums() {   
 	const [albums, setAlbums] = useState<Album[]>([]);
 
 	useEffect(() => {
 
 		getAlbums();
+		console.log('albums');
+		
 
 		async function getAlbums() {
 			const res = await fetch(import.meta.env.VITE_API_ALBUMS_URI);
@@ -24,10 +26,10 @@ export default function Albums() {
 		<>
 			<h2>Albums</h2>
 			{albums && albums.map((album: Album, index: number) => (
-				<>			
-					<Link key={index} to={`/albums/${album.id}`}>{album.title}</Link>
+				<div key={index}>			
+					<Link to={`/albums/${album.id}`}>{album.title}</Link>
 					<br/>
-				</>
+				</div>
 			))}
 		</>
 	)

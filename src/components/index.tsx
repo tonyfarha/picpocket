@@ -1,0 +1,6 @@
+export * from './Albums'
+export * from './Footer'
+export * from './Header'
+export * from './Likes'
+export * from './SingleAlbum'
+export * from './SinglePhoto'

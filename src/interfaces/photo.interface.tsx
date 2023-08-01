@@ -4,4 +4,5 @@ export interface Photo {
     albumId: number;
     thumbnailUrl: string;
     url: string;
+    isLiked?: boolean;
 }

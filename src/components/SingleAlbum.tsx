@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { useParams } from "react-router-dom";
 import { usePicPocket } from "../contexts/PicContext";
 import { SinglePhoto } from ".";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 
 
@@ -18,11 +19,11 @@ export function SingleAlbum() {
 
 	return (
 		<>
-			{loading && <h1>Loading...</h1>}
+			{loading && <ProgressSpinner />}
 			{!loading && 
 				<div className="album-grid">
-					{photos.map((photo, index) => (
-						<SinglePhoto key={index} photo={photo} />
+					{photos.map(photo => (
+						<SinglePhoto key={photo.id} photo={photo} />
 					))}
 				</div> 
 			}

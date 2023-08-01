@@ -20,7 +20,8 @@ export default function PicContextPrivider({ children }: { children: ReactNode }
 		localStorage.setItem('PicPocketLikes', JSON.stringify([...likes.filter(pic => pic.id != photoId)]))
 	}
 
-	const getPhotos = async (albumId: string | undefined) => {		
+	const getPhotos = async (albumId: string | undefined) => {	
+		setLoading(true);	
 		const res = await fetch(`${import.meta.env.VITE_API_PHOTOS_URI}?albumId=${albumId}`);
 		const json = await res.json();
 		setPhotos(json as Photo[]);	

@@ -3,3 +3,7 @@ export interface Album {
     title: string;
     userId: number;
 }
+
+export interface GroupedAlbums {
+    [key: string]: Album[];
+}

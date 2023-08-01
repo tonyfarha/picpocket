@@ -6,16 +6,18 @@ export const PicContext = createContext({});
 export default function PicContextPrivider({ children }: { children: ReactNode }) {
 	const [loading, setLoading] = useState<boolean>(true);
 	const [photos, setPhotos] = useState<Photo[]>([]);
-	const [likes, setLikes] = useState<Photo[]>([]);
+	const [likes, setLikes] = useState<Photo[]>(JSON.parse(localStorage.getItem('PicPocketLikes') as string) || []);
 
 
 	const like = (photo: Photo) => {
 		if(likes.some(pic => pic.id == photo.id)) return
-		setLikes(prev => [...prev, photo])		
+		setLikes(prev => [...prev, photo])	
+		localStorage.setItem('PicPocketLikes', JSON.stringify([...likes, photo]))	
 	}
 
 	const dislike = (photoId: number) => {
 		setLikes(prev => prev.filter(pic => pic.id != photoId))	
+		localStorage.setItem('PicPocketLikes', JSON.stringify([...likes.filter(pic => pic.id != photoId)]))
 	}
 
 	const getPhotos = async (albumId: string | undefined) => {		

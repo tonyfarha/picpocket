@@ -6,14 +6,16 @@ export const PicContext = createContext({});
 export default function PicContextPrivider({ children }: { children: ReactNode }) {
 	const [loading, setLoading] = useState<boolean>(true);
 	const [photos, setPhotos] = useState<Photo[]>([]);
+	const [likes, setLikes] = useState<Photo[]>([]);
 
 
-	const like = () => {
-		console.log('like');
+	const like = (photo: Photo) => {
+		if(likes.some(pic => pic.id == photo.id)) return
+		setLikes(prev => [...prev, photo])		
 	}
 
-	const dislike = () => {
-		console.log('dislike');
+	const dislike = (photoId: number) => {
+		setLikes(prev => prev.filter(pic => pic.id != photoId))	
 	}
 
 	const getPhotos = async (albumId: string | undefined) => {		
@@ -28,7 +30,8 @@ export default function PicContextPrivider({ children }: { children: ReactNode }
 		dislike,
 		photos,
 		loading,
-		getPhotos
+		getPhotos,
+		likes
 	}
 
   return (

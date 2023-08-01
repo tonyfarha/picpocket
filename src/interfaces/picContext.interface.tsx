@@ -1,10 +1,10 @@
-import { MouseEventHandler } from "react";
 import { Photo } from ".";
 
 export interface PicContextInterface {
-    like: MouseEventHandler,
-    dislike: MouseEventHandler,
+    like: (photo: Photo) => void,
+    dislike: (photoId: number) => void,
     photos: Photo[],
     loading: boolean, 
-    getPhotos: (albumId: string | undefined) => Promise<void>
+    getPhotos: (albumId: string | undefined) => Promise<void>,
+    likes: Photo[]
 }

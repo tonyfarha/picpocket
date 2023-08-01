@@ -9,6 +9,7 @@ export function Header() {
     <>
       <h1>PicPocket</h1>
       <button onClick={() => navigate('/')}>Go Home</button>
+      <button onClick={() => navigate('/likes')}>Likes</button>
     </>
   )
 }

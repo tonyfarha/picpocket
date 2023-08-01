@@ -1,5 +1,5 @@
 .album-grid {
-  max-width: 60%;
+  max-width: 50%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));

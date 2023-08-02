@@ -22,7 +22,7 @@ export default function PicContextProvider({ children }: { children: ReactNode }
 
 	const getPhotos = async (albumId: string | undefined) => {	
 		setLoading(true);	
-		const res = await fetch(`${import.meta.env.VITE_API_PHOTOS_URI}?albumId=${albumId}`);
+		const res = await fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`);
 		const json = await res.json();
 		setPhotos(json as Photo[]);	
 		setLoading(false);		

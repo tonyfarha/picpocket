@@ -15,7 +15,7 @@ export function Albums() {
 		
 
 		async function getAlbums() {
-			const res = await fetch(import.meta.env.VITE_API_ALBUMS_URI);
+			const res = await fetch('https://jsonplaceholder.typicode.com/albums');
 			const json = await res.json();
 			// setAlbums(json as Album[]);
 			const groupedAlbumsByUserId: GroupedAlbums = json.reduce((acc: GroupedAlbums, curr: Album) => {				

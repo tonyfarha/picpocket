@@ -3,7 +3,7 @@ import { Photo, PicContextInterface } from '../interfaces';
 
 export const PicContext = createContext({});
 
-export default function PicContextPrivider({ children }: { children: ReactNode }) {
+export default function PicContextProvider({ children }: { children: ReactNode }) {
 	const [loading, setLoading] = useState<boolean>(true);
 	const [photos, setPhotos] = useState<Photo[]>([]);
 	const [likes, setLikes] = useState<Photo[]>(JSON.parse(localStorage.getItem('PicPocketLikes') as string) || []);

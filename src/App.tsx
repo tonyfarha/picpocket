@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
-import './App.css'
 import { Albums, SingleAlbum, Header, Footer, Likes, NotFound } from './components'
+import './assets/styles/style.scss'
  
 
 function App() {

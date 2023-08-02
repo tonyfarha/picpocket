@@ -1,4 +1,4 @@
-import { Photo } from ".";
+import { GroupedAlbums, Photo } from ".";
 
 export interface PicContextInterface {
     like: (photo: Photo) => void,
@@ -6,5 +6,7 @@ export interface PicContextInterface {
     photos: Photo[],
     loading: boolean, 
     getPhotos: (albumId: string | undefined) => Promise<void>,
+    getAlbums: () => Promise<void>,
+    groupedAlbums: GroupedAlbums,
     likes: Photo[]
 }

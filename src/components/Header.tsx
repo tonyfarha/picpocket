@@ -6,7 +6,6 @@ export function Header() {
 
   return (
     <header>
-      {/* TODO */}
       <Link to='/'>
         <img className="logo" src={logo} alt="PikPocket" />
       </Link>

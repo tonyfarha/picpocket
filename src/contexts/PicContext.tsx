@@ -1,10 +1,11 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
-import { Photo, PicContextInterface } from '../interfaces';
+import { Album, GroupedAlbums, Photo, PicContextInterface } from '../interfaces';
 
 export const PicContext = createContext({});
 
 export default function PicContextProvider({ children }: { children: ReactNode }) {
 	const [loading, setLoading] = useState<boolean>(true);
+	const [groupedAlbums, setGroupedAlbums] = useState<GroupedAlbums>({});
 	const [photos, setPhotos] = useState<Photo[]>([]);
 	const [likes, setLikes] = useState<Photo[]>(JSON.parse(localStorage.getItem('PicPocketLikes') as string) || []);
 
@@ -20,6 +21,22 @@ export default function PicContextProvider({ children }: { children: ReactNode }
 		localStorage.setItem('PicPocketLikes', JSON.stringify([...likes.filter(pic => pic.id != photoId)]))
 	}
 
+	const getAlbums = async () => {
+		setLoading(true);
+		const res = await fetch('https://jsonplaceholder.typicode.com/albums');
+		const json = await res.json();
+		const groupedAlbumsByUserId: GroupedAlbums = json.reduce((acc: GroupedAlbums, curr: Album) => {				
+			if(acc[curr.userId]) {
+				acc[curr.userId].push(curr)
+			}else {
+				acc[curr.userId] = [curr]
+			}
+			return acc;
+		}, {})
+		setGroupedAlbums(groupedAlbumsByUserId);
+		setLoading(false);			
+	}
+
 	const getPhotos = async (albumId: string | undefined) => {	
 		setLoading(true);	
 		const res = await fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`);
@@ -33,6 +50,8 @@ export default function PicContextProvider({ children }: { children: ReactNode }
 		dislike,
 		photos,
 		loading,
+		getAlbums,
+		groupedAlbums,
 		getPhotos,
 		likes
 	}

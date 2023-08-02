@@ -8,6 +8,7 @@ export function Likes() {
 
     return (
         <>
+            <h2 style={{ textAlign: 'center', margin: '50px 0' }}><i className="pi pi-images" style={{ fontSize: '1.5rem' }}></i> Liked Photos</h2>
             <div className="album-grid">
                 {likes.map((photo, index) => (
                     <SinglePhoto key={index} photo={photo} />

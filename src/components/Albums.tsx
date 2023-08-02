@@ -1,33 +1,19 @@
-import { useEffect, useState } from "react"
-import { Album, GroupedAlbums } from "../interfaces";
+import { useLayoutEffect } from "react"
+import { Album } from "../interfaces";
 import { Link } from "react-router-dom";
 import { Divider } from 'primereact/divider';
+import { usePicPocket } from "../contexts/PicContext";
+import { ProgressSpinner } from "primereact/progressspinner";
         
 
 export function Albums() {   
-	// const [albums, setAlbums] = useState<Album[]>([]);
-	const [groupedAlbums, setGroupedAlbums] = useState<GroupedAlbums>({});
 
-	useEffect(() => {
+	const { getAlbums, groupedAlbums, loading } = usePicPocket();
+
+	useLayoutEffect(() => {
 
 		getAlbums();
 		console.log('albums');
-		
-
-		async function getAlbums() {
-			const res = await fetch('https://jsonplaceholder.typicode.com/albums');
-			const json = await res.json();
-			// setAlbums(json as Album[]);
-			const groupedAlbumsByUserId: GroupedAlbums = json.reduce((acc: GroupedAlbums, curr: Album) => {				
-				if(acc[curr.userId]) {
-					acc[curr.userId].push(curr)
-				}else {
-					acc[curr.userId] = [curr]
-				}
-				return acc;
-			}, {})
-			setGroupedAlbums(groupedAlbumsByUserId);			
-		}
 
 	}, [])
 
@@ -35,19 +21,23 @@ export function Albums() {
 
 	return (
 		<>
-		{/* TODO */}
-			<h2>Albums</h2>
-			{groupedAlbums && Object.keys(groupedAlbums).map((groupedAlbumNum: string, index: number) => (
-				<div className="grouped-albums" key={index}>
-					<h3>By user {groupedAlbumNum}</h3>
-					{groupedAlbums[groupedAlbumNum].map((album: Album, albumIndex: number) => (
-						<div className="album" key={albumIndex}>
-							<Link to={`/albums/${album.id}`}>{album.title}</Link>
+			{loading && <ProgressSpinner />}
+			{!loading &&
+				<>
+					<h2 style={{textAlign: 'center', margin: '50px 0'}}><i className="pi pi-images" style={{ fontSize: '1.5rem' }}></i> Albums</h2>
+					{groupedAlbums && Object.keys(groupedAlbums).map((groupedAlbumNum: string, index: number) => (
+						<div className="grouped-albums" key={index}>
+							<h3><i className="pi pi-user" style={{ fontSize: '1.2rem' }}></i> By user {groupedAlbumNum}</h3>
+							{groupedAlbums[groupedAlbumNum].map((album: Album, albumIndex: number) => (
+								<div className="album" key={albumIndex}>
+									<Link to={`/albums/${album.id}`}>{album.title}</Link>
+								</div>
+							))}
+							<Divider />
 						</div>
 					))}
-					<Divider />
-				</div>
-			))}
+				</>
+			}
 		</>
 	)
 }

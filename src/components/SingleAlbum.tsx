@@ -20,12 +20,15 @@ export function SingleAlbum() {
 	return (
 		<>
 			{loading && <ProgressSpinner />}
-			{!loading && 
-				<div className="album-grid">
-					{photos.map(photo => (
-						<SinglePhoto key={photo.id} photo={photo} />
-					))}
-				</div> 
+			{!loading &&
+				<>
+					<h2 style={{ textAlign: 'center', margin: '50px 0' }}><i className="pi pi-images" style={{ fontSize: '1.5rem' }}></i> Album {albumId}</h2>
+					<div className="album-grid">
+						{photos.map(photo => (
+							<SinglePhoto key={photo.id} photo={photo} />
+						))}
+					</div>
+				</>
 			}
 		</>
 	)

@@ -5,7 +5,6 @@ export function NotFound() {
   return (
     <>
         <img src={NotFoundImage} width="100%" alt="Not Found" />
-        {/* TODO */}
     </>
   )
 }

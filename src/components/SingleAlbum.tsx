@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useLayoutEffect } from "react"
 import { useParams } from "react-router-dom";
 import { usePicPocket } from "../contexts/PicContext";
 import { SinglePhoto } from ".";
@@ -10,7 +10,7 @@ export function SingleAlbum() {
 	const { id: albumId } = useParams();
 	const { photos, getPhotos, loading } = usePicPocket();
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		console.log('albumId', albumId);
 		
 		getPhotos(albumId);

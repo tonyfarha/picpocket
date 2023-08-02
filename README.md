@@ -16,7 +16,6 @@ The application uses the following REST API endpoints to fetch data:
 
 - Fetch all albums: `GET https://jsonplaceholder.typicode.com/albums`
 - Fetch a specific album: `GET https://jsonplaceholder.typicode.com/albums/{id}`
-- Fetch all photos: `GET https://jsonplaceholder.typicode.com/photos`
 - Fetch photos in a specific album: `GET https://jsonplaceholder.typicode.com/photos?albumId={id}`
 
 Note: The application does not save any data in the backend or a database; it operates as a client-only application (localStorage).

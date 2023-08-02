@@ -8,6 +8,7 @@ export function Header() {
 
   return (
     <header>
+      {/* TODO */}
       <img className="logo" src={logo} alt="PikPocket" />
       <div>
         <button onClick={() => navigate('/')}>Go Home</button>

@@ -1,5 +1,5 @@
 export function Footer() {
   return (
-    <div>Footer</div>
+    <footer>PicPocket {new Date().getFullYear()}</footer>
   )
 }

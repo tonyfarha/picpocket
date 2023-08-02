@@ -1,3 +1,6 @@
+h1, h2, h3, h4, h5, h6 {
+  color: #233565;
+}
 #root {
   padding: 0 10px;
 }
@@ -8,11 +11,23 @@ header {
 header .logo {
   width: 150px;
 }
+main {
+  min-height: 65vh;
+}
+.p-progress-spinner {
+  left: 50%;
+  transform: translate(-50%);
+}
 .grouped-albums .album {
   padding: 5px 0;
 }
 .grouped-albums .album a {
-  color: #555;
+  color: #233565;
+  font-size: 18px;
+  transition: color .2s ease-in;
+}
+.grouped-albums .album a:hover {
+  color: #8BD8BC;
 }
 .album-grid {
   margin: 0 auto;
@@ -37,7 +52,14 @@ header .logo {
   border-radius: 5px 5px 0 0;
   width: 100%;
 }
-
+footer {
+  background: #8BD8BC;
+  padding: 15px 10px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 30px;
+}
 @media screen and (min-width: 768px) {
   .album-grid {
     grid-template-columns: repeat(4, 1fr);

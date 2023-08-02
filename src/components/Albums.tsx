@@ -13,7 +13,6 @@ export function Albums() {
 	useLayoutEffect(() => {
 
 		getAlbums();
-		console.log('albums');
 
 	}, [])
 

@@ -11,7 +11,6 @@ export function SingleAlbum() {
 	const { photos, getPhotos, loading } = usePicPocket();
 
 	useLayoutEffect(() => {
-		console.log('albumId', albumId);
 		
 		getPhotos(albumId);
 
